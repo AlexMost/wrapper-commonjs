@@ -1,0 +1,20 @@
+{
+    "abstract": {
+        "api_version": 3
+    },
+
+    "deps": {
+        "mod1": ["mod2"]
+    },
+
+    "realms": {
+        "default": [
+            {
+                "name": "core",
+                "modules": [
+                    "mod1"
+                ]
+            }
+        ]
+    }
+}
