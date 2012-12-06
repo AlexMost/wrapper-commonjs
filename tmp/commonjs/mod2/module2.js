@@ -1,3 +1,3 @@
 console.log('module1 initialized');
 
-module.exports = {module1:'module1'}
+module.exports = {module2:'module2'}

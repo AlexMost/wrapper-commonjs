@@ -124,7 +124,8 @@ require.define("mod2",
 );
 
 
-require.define("mod1", {"mod1/index": function(exports, require, module) {(function() {
+require.define("mod1", {
+  "mod1/index": function(exports, require, module) {(function() {
 
   "Simple common js module";
   m1 = require('module1');
@@ -135,7 +136,8 @@ require.define("mod1", {"mod1/index": function(exports, require, module) {(funct
   module.exports = {index:'module1'};
 
 }).call(this);
-}, "mod1/module1": function(exports, require, module) {(function() {
+},
+    "mod1/module1": function(exports, require, module) {(function() {
 
   "Simple common js module";
 

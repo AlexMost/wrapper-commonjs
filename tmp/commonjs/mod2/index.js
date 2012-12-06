@@ -1,3 +1,3 @@
-console.log('index mod1 initialized');
+console.log('index mod2 initialized');
 
-module.exports = {module1: 'index'}
+module.exports = {module2: 'index'}
