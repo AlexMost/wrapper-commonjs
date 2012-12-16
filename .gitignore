@@ -1,5 +1,5 @@
 *.swp
-
-cs/build/*.js
-
+lib/**
 .idea/*
+*.sublime-project
+*.sublime-workspace

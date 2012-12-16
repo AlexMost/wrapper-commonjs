@@ -1,0 +1,17 @@
+{
+  "name": "wrapper-commonjs",
+  "description": "wrapper tool for running commonjs modules in browser",
+  "version": "0.0.1",
+  "author": "Alexander Mostovenko",
+  "repository": {
+    "type" : "git",
+    "url": "https://github.com/AlexMost/wrapper-commonjs.git"
+  },
+  "scripts" : {"preinstall": "cake build"},
+  "engine" : [ "node >=0.1.102" ],
+  "main" : "./lib/wrapper.js",
+  "bin": {},
+  "dependencies" : {
+    "coffee-script" : "~1.1.2"
+  }
+}

@@ -1,5 +1,11 @@
+"""
+Simple common js bootstrapper.
+Inspired by stitch.
+"""
+
 unless this.require
-    modules = {}
+    window.bootstrapper = {}
+    modules = window.bootstrapper.modules = {}
     cache = {}
 
 
@@ -18,10 +24,11 @@ unless this.require
 
 
     require = (name, root, ns) ->
-        if ns? and !((expand root, name) of modules) # TODO: handle when module is not loaded.
-            name = "#{ns}/#{expand '', name}"
-
         path = expand(root, name)
+
+        if ns? and !(modules[path] || modules[(expand(path, './index'))]) # TODO: handle when module is not loaded.
+            path = "#{ns}/#{expand '', name}"
+
         module = cache[path]
 
         if module
