@@ -1,7 +1,7 @@
 {
   "name": "wrapper-commonjs",
   "description": "wrapper tool for running commonjs modules in browser",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Alexander Mostovenko",
   "repository": {
     "type" : "git",
