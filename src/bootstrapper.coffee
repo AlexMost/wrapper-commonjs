@@ -80,10 +80,4 @@ unless this.require
             _key =  if ns then "#{ns}/#{key}" else key
             modules[_key] = partial(value, undefined, _require, undefined)
             undefined
-
-        for key, value of bundle # make auto require onload
-            _key =  if ns then "#{ns}/#{key}" else key
-            modules[_key] {}, {}
-            undefined
-
         undefined
