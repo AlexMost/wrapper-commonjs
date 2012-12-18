@@ -46,7 +46,11 @@ wrap_module = (sources, ns) ->
         if sources.type is COMMON_JS
             wrap_module [sources], ns
         else
-            sources.source
+            [
+                "/*ZB: #{sources.filename} */"
+                "#{sources.source};"
+            ].join '\n'
+
 
 
 wrap_file = (source, filename, type, ns) ->
