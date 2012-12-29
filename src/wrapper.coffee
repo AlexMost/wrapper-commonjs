@@ -18,7 +18,7 @@ wrap_bundle = (source, pre_header=null) ->
 
 wrap_modules = (modules) ->
     """
-    @moduels: list of dict with values {sources, ns}
+    @modules: list of dicts {sources, ns}
             [
                 {ns:'namespace', sources: {filename: source}}
                 .
@@ -27,7 +27,7 @@ wrap_modules = (modules) ->
             ]
     """
     
-    (wrap_module(m.sources, m.ns) for m in modules).join('\n')
+    ((wrap_module m.sources, m.ns) for m in modules).join('\n')
 
 
 wrap_module = (sources, ns) ->
@@ -37,9 +37,9 @@ wrap_module = (sources, ns) ->
 
     if sources.length
         [
-            (s.source for s in sources when s.type == PLAIN_JS).join '\n'
+            (s.source for s in sources when s.type is PLAIN_JS).join '\n'
             "require.define('#{ns}', {"
-            (wrap_file(s.source, s.filename, s.type, ns) for s in sources when s.type == COMMON_JS).join ',\n'
+            ((wrap_file s.source, s.filename, s.type, ns) for s in sources when s.type is COMMON_JS).join ',\n'
             "});\n"
         ].join('\n')
     else

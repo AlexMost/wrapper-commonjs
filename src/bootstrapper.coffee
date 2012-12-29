@@ -4,9 +4,39 @@ Inspired by stitch.
 """
 
 unless this.require
-    window.bootstrapper = {}
-    modules = window.bootstrapper.modules = {}
+    modules = {}
     cache = {}
+
+    unless window.bootstrapper
+        doc = window.document
+        add = if doc.addEventListener then 'addEventListener' else 'attachEvent'
+        rem = if doc.addEventListener then 'removeEventListener' else 'detachEvent'
+        pre = if doc.addEventListener then '' else 'on'
+
+        window.bootstrapper =
+            init_queue: []
+            document_ready_queue: []
+            document_loaded_queue: []
+            modules: modules
+            run_queue: (queue) ->
+                while f = queue.shift()
+                    f()
+            run_init_queue: ->
+                window.bootstrapper.run_queue window.bootstrapper.init_queue
+
+        if doc.readyState is 'complete'
+            # run everything if all events has been fired already
+            window.bootstrapper.run_queue window.bootstrapper.document_ready_queue
+            window.bootstrapper.run_queue window.bootstrapper.document_loaded_queue
+
+        else
+            # postpone queues processing
+            doc[add](pre + 'DOMContentLoaded',
+                     -> window.bootstrapper.run_queue window.bootstrapper.document_ready_queue)
+            window[add](pre + 'load',
+                        -> window.bootstrapper.run_queue window.bootstrapper.document_loaded_queue)
+
+
 
 
     partial = (fn) ->
@@ -23,7 +53,12 @@ unless this.require
             fn.apply this, new_args
 
 
+
     require = (name, root, ns) ->
+        # special case
+        if name is 'bootstrapper'
+            return window.bootstrapper
+
         path = expand(root, name)
 
         if ns? and !(modules[path] || modules[(expand(path, './index'))]) # TODO: handle when module is not loaded.
@@ -81,3 +116,4 @@ unless this.require
             modules[_key] = partial(value, undefined, _require, undefined)
             undefined
         undefined
+
