@@ -53,6 +53,37 @@ unless this.require
 
 
 
+    unless window.bootstrapper
+        doc = window.document
+        add = if doc.addEventListener then 'addEventListener' else 'attachEvent'
+        rem = if doc.addEventListener then 'removeEventListener' else 'detachEvent'
+        pre = if doc.addEventListener then '' else 'on'
+
+        window.bootstrapper =
+            init_queue: []
+            document_ready_queue: []
+            document_loaded_queue: []
+            modules: modules
+            run_queue: (queue) ->
+                while f = queue.shift()
+                    f()
+            run_init_queue: ->
+                window.bootstrapper.run_queue window.bootstrapper.init_queue
+
+        if doc.readyState is 'complete'
+            # run everything if all events has been fired already
+            window.bootstrapper.run_queue window.bootstrapper.document_ready_queue
+            window.bootstrapper.run_queue window.bootstrapper.document_loaded_queue
+
+        else
+            # postpone queues processing
+            doc[add](pre + 'DOMContentLoaded',
+                     -> window.bootstrapper.run_queue window.bootstrapper.document_ready_queue)
+            window[add](pre + 'load',
+                        -> window.bootstrapper.run_queue window.bootstrapper.document_loaded_queue)
+
+
+
 
     partial = (fn) ->
         partial_args = Array::slice.call arguments
