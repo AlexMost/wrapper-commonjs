@@ -30,35 +30,37 @@ wrap_modules = (modules) ->
     ((wrap_module m.sources, m.ns) for m in modules).join('\n')
 
 
-wrap_module = (sources, ns) ->
+wrap_module = (sources, ns, type) ->
     """
     @sources: dict of key values filenames and source codes {filename, source}
     """
 
+    get_m_type = (m) ->  m.type or type
+
     if sources.length
         [
-            (s.source for s in sources when s.type is PLAIN_JS).join '\n'
-            "require.define('#{ns}', {"
-            ((wrap_file s.source, s.filename, s.type, ns) for s in sources when s.type is COMMON_JS).join ',\n'
-            "});\n"
+            ((wrap_plain s.source, s.filename) for s in sources when get_m_type(s) is PLAIN_JS).join '\n'
+            ((wrap_file s.source, s.filename, s.type, ns) for s in sources when get_m_type(s) is COMMON_JS).join ',\n'
         ].join('\n')
     else
-        if sources.type is COMMON_JS
-            wrap_module [sources], ns
-        else
-            [
-                "/*ZB: #{sources.filename} */"
-                "#{sources.source};"
-            ].join '\n'
+        wrap_module [sources], ns, type
 
+
+wrap_plain = (source, filename) ->
+    [
+        "/*ZB:  #{filename} */"
+        source
+    ].join('\n')
 
 
 wrap_file = (source, filename, type, ns) ->
     [
         "/*ZB:  #{ns}/#{filename} */"
+        "require.define('#{ns}', {"
         "'#{filename}': function(exports, require, module) {(function() {"
         source
         "}).call(this);}"
+        "});"
     ].join('\n')
 
 
