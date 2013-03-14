@@ -40,7 +40,7 @@ wrap_module = (sources, ns, type) ->
     if sources.length
         [
             ((wrap_plain s.source, s.filename) for s in sources when get_m_type(s) is PLAIN_JS).join '\n'
-            ((wrap_file s.source, s.filename, s.type, ns) for s in sources when get_m_type(s) is COMMON_JS).join ',\n'
+            ((wrap_file s.source, s.filename, s.type, ns) for s in sources when get_m_type(s) is COMMON_JS).join '\n'
         ].join('\n')
     else
         wrap_module [sources], ns, type
