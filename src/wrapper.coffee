@@ -49,7 +49,7 @@ wrap_module = (sources, ns, type) ->
 wrap_plain = (source, filename) ->
     [
         "/*ZB:  #{filename} */"
-        source
+        "#{source};"
     ].join('\n')
 
 

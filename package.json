@@ -1,17 +1,25 @@
 {
   "name": "wrapper-commonjs",
   "description": "wrapper tool for running commonjs modules in browser",
-  "version": "0.0.26",
-  "author": "Alexander Mostovenko, Eugene Naumenko",
+  "version": "0.0.27",
+  "author": {
+    "name": "Alexander Mostovenko, Eugene Naumenko"
+  },
   "repository": {
-    "type" : "git",
+    "type": "git",
     "url": "https://github.com/AlexMost/wrapper-commonjs.git"
   },
-  "scripts" : {"preinstall": "cake build"},
-  "engine" : [ "node >=0.1.102" ],
-  "main" : "./lib/wrapper.js",
+  "scripts": {
+    "preinstall": "cake build"
+  },
+  "engine": [
+    "node >=0.1.102"
+  ],
+  "main": "./lib/wrapper.js",
   "bin": {},
-  "dependencies" : {
-    "coffee-script" : "~1.1.2"
-  }
+  "dependencies": {
+    "coffee-script": "~1.1.2"
+  },
+  "readme": "wrapper-commonjs\n================\n\nwrapper-commonjs provides low-level api for wrapping your commonjs modules stacking them together and\nmaking work them in browser.\n\nProvides possibility to add namespaces to modules.\n\n\nnpm install wrapper-commonjs\n\n* version - 0.0.25 (06.03.13)\n  -- fixed bug with reading index files from cache, added init queues.\n\n",
+  "readmeFilename": "README.md"
 }
