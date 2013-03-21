@@ -106,8 +106,15 @@ unless this.require
             return window.bootstrapper
 
         path = expand(root, name)
+        ns_path = "#{ns}/#{expand '', name}"
+        top_level_module = modules[path] or modules[(expand(path, './index'))] 
 
-        if ns? and !(modules[path] or modules[(expand(path, './index'))]) # TODO: handle when module is not loaded.
+        if ns and !top_level_module # TODO: handle when module is not loaded.
+            path = ns_path
+
+        ns_module = modules[ns_path] or modules[(expand(ns_path, './index'))]
+
+        if ns and top_level_module and ns_module
             path = "#{ns}/#{expand '', name}"
 
         module = cache[path] or cache[expand(path, './index')]
