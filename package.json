@@ -1,7 +1,7 @@
 {
   "name": "wrapper-commonjs",
   "description": "wrapper tool for running commonjs modules in browser",
-  "version": "0.0.27",
+  "version": "0.0.17",
   "author": {
     "name": "Alexander Mostovenko, Eugene Naumenko"
   },
@@ -21,5 +21,7 @@
     "coffee-script": "~1.1.2"
   },
   "readme": "wrapper-commonjs\n================\n\nwrapper-commonjs provides low-level api for wrapping your commonjs modules stacking them together and\nmaking work them in browser.\n\nProvides possibility to add namespaces to modules.\n\n\nnpm install wrapper-commonjs\n\n* version - 0.0.25 (06.03.13)\n  -- fixed bug with reading index files from cache, added init queues.\n\n",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "_id": "wrapper-commonjs@0.0.27",
+  "_from": "wrapper-commonjs@>=0.0.26"
 }
