@@ -1,3 +1,6 @@
+# -Simple common js bootstrapper.
+# -Inspired by stitch.
+
 unless this.require
     modules = {}
     cache = {}
