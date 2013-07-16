@@ -7,12 +7,6 @@ unless this.require
     modules = {}
     cache = {}
 
-    unless window.bootstrapper
-        window.bootstrapper = {}
-
-    window.bootstrapper.modules = modules # for debug
-    window.bootstrapper.cache = cache # for debug
-
     partial = (fn) ->
         partial_args = Array::slice.call arguments
         partial_args.shift()
@@ -27,10 +21,6 @@ unless this.require
             fn.apply this, new_args
 
     require = (name, root, ns) ->
-        # special case
-        if name is 'bootstrapper'
-            return window.bootstrapper
-
         path = expand(root, name)
         ns_path = "#{ns}/#{expand '', name}"
         top_level_module = modules[path] or modules[(expand(path, './index'))] 
@@ -82,6 +72,8 @@ unless this.require
     diranme = (path) -> path.split('/')[0..-1].join '/'
 
     this.require = (name) -> require name, ''
+    this.require.modules = modules
+    this.require.cache = cache
 
     this.require.define = (ns, bundle) ->
         _require = partial(require, undefined, undefined, ns)
