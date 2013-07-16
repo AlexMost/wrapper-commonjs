@@ -1,8 +1,3 @@
-"""
-Simple common js bootstrapper.
-Inspired by stitch.
-"""
-
 unless this.require
     modules = {}
     cache = {}
@@ -51,6 +46,8 @@ unless this.require
         else
             throw "module '#{name}' is not found"
 
+    require.modules = -> modules
+
     expand = (root, name) ->
         results = []
 
@@ -72,11 +69,11 @@ unless this.require
     diranme = (path) -> path.split('/')[0..-1].join '/'
 
     this.require = (name) -> require name, ''
-    this.require.modules = modules
-    this.require.cache = cache
+    this.require.modules = require.modules
 
     this.require.define = (ns, bundle) ->
         _require = partial(require, undefined, undefined, ns)
+        _require.modules = require.modules
 
         for key, value of bundle
             _key =  if ns then "#{ns}/#{key}" else key
