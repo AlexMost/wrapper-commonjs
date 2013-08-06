@@ -1,7 +1,5 @@
-"""
-Simple common js bootstrapper.
-Inspired by stitch.
-"""
+# -Simple common js bootstrapper.
+# -Inspired by stitch.
 
 unless this.require
     modules = {}
@@ -50,6 +48,8 @@ unless this.require
                 throw e
         else
             throw "module '#{name}' is not found"
+
+    require.modules = -> modules
 
     expand = (root, name) ->
         results = []
