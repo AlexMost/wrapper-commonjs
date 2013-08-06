@@ -49,8 +49,6 @@ unless this.require
         else
             throw "module '#{name}' is not found"
 
-    require.modules = -> modules
-
     expand = (root, name) ->
         results = []
 
