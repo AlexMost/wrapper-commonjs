@@ -23,7 +23,7 @@ unless this.require
     require = (name, root, ns) ->
         path = expand(root, name)
         ns_path = "#{ns}/#{expand '', name}"
-        top_level_module = modules[path] or modules[(expand(path, './index'))] 
+        top_level_module = modules[path] or modules[(expand(path, './index'))]
 
         if ns and !top_level_module # TODO: handle when module is not loaded.
             path = ns_path
@@ -72,8 +72,8 @@ unless this.require
     diranme = (path) -> path.split('/')[0..-1].join '/'
 
     this.require = (name) -> require name, ''
-    this.require.modules = modules
-    this.require.cache = cache
+    this.require.modules = -> modules
+    this.require.cache = -> cache
 
     this.require.define = (ns, bundle) ->
         _require = partial(require, undefined, undefined, ns)
