@@ -4,14 +4,14 @@ bootstrapper_file = path.join __dirname, './bootstrapper.js'
 COMMON_JS = 'commonjs'
 PLAIN_JS = 'plainjs'
 
-wrap_bundle = (source, pre_header=null) ->
+wrap_bundle = (source, pre_header=null, external_require=false) ->
     """
     @source: source code of bundle.
     """
 
     [
         pre_header or ''
-        (fs.readFileSync bootstrapper_file).toString()
+        if external_require then '' else (fs.readFileSync bootstrapper_file).toString()
         source
     ].join('\n')
 
