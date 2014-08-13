@@ -10,7 +10,7 @@
     "url": "https://github.com/AlexMost/wrapper-commonjs.git"
   },
   "scripts": {
-    "preinstall": "cake build"
+    "prepublish": "cake build"
   },
   "engine": [
     "node >=0.1.102"
